@@ -1,14 +1,12 @@
 package br.com.unisagradoworks;
 
 import com.google.zxing.BarcodeFormat;
-import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
 import java.util.logging.Logger;
 
 public class GeradorQRCode {
@@ -24,8 +22,6 @@ public class GeradorQRCode {
 
     public static void gerarQRCode(String texto, int largura, int altura, String formatoImagem, String caminhoImagem) {
         try {
-            //TODO USAR PRECONDITIONS.
-
             // Configurar parâmetros para gerar o QR Code
             QRCodeWriter writer = new QRCodeWriter();
             BitMatrix matriz = writer.encode(texto, BarcodeFormat.QR_CODE, largura, altura);
@@ -43,7 +39,7 @@ public class GeradorQRCode {
             ImageIO.write(imagem, formatoImagem, arquivo);
             logger.info("QR Code gerado com sucesso!");
 
-        } catch (WriterException | IOException e) {
+        } catch (Exception e) {
             logger.severe("Erro ao gerar QR Code: " + e.getMessage());
         }
     }

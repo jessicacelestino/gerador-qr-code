@@ -26,13 +26,13 @@ class GeradorQRCodeTest {
     public void setUp() {
         File arquivoImagem = new File("src/main/resources/imagem.png");
 
-        // Verificação
+        /* Verificação */
         if (arquivoImagem.exists()) {
-            arquivoImagem.delete(); // Deleta o arquivo antes de cada teste
+            arquivoImagem.delete(); /* Deleta o arquivo antes de cada teste */
         }
 
-        // Configuração para o teste
-        texto = "Texto a ser codificado no QR Code";
+        /* Configuração para o teste */
+        texto = "https://www.canva.com/design/DAFkU9dzOWA/a9Zq9e7YbKnX-aUTNlyLwQ/edit?utm_content=DAFkU9dzOWA&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton";
         largura = 600;
         altura = 600;
         formatoImagem = "png";
@@ -40,25 +40,43 @@ class GeradorQRCodeTest {
     }
 
     @Test
-    @DisplayName("Dado que eu informe os valores  " +
+    @DisplayName("Dado que eu informe os valores corretos" +
                  "então deve ser gerado o QR Code com sucesso")
-    public void testeGerarQrCodeComSucesso() {
+    void testeGerarQrCodeComSucesso() {
         // Execução do método
         GeradorQRCode.gerarQRCode(texto, largura, altura, formatoImagem, caminhoImagem);
 
         // Verificação do resultado
         File arquivoImagem = new File(caminhoImagem);
-
         assertTrue(arquivoImagem.exists());
-        assertTrue(arquivoImagem.isFile());
-        Assertions.assertEquals(largura, arquivoImagem.length());
-        Assertions.assertEquals(altura, arquivoImagem.length());
-        Assertions.assertEquals(texto, arquivoImagem.getName());
-        Assertions.assertEquals(formatoImagem, GerarQRCodeUtils.getFileExtension(arquivoImagem));
-
-        //TESTE DE PARAMETRO PARA VERIFICAR SE OS VALORES ESTAO NULOS OU VAZIOS
-        //METODO QUE LE O CONTEUDO PARA ler o conteudo do qrcode
     }
 
+    @Test
+    @DisplayName("Dado que eu informe o formato da imagem em PNG" +
+                "então deve ser gerado o QR Code com a extensão .png")
+    void testeGerarQrCodeComFormatoPng() {
+        // Execução do método
+        GeradorQRCode.gerarQRCode(texto, largura, altura, formatoImagem, caminhoImagem);
 
+        // Verificação do resultado
+        File arquivoImagem = new File(caminhoImagem);
+        assertTrue(arquivoImagem.exists());
+
+        Assertions.assertEquals(formatoImagem, GerarQRCodeUtils.getFileExtension(arquivoImagem));
+    }
+
+    @Test
+    @DisplayName("Dado que eu informe a url do QR Code" +
+                 "então deve ser gerado o QR Code com a url que foi informada")
+    void testeGerarQrCodeComUrl() {
+        // Execução do método
+        GeradorQRCode.gerarQRCode(texto, largura, altura, formatoImagem, caminhoImagem);
+
+        // Verificação do resultado
+        File arquivoImagem = new File(caminhoImagem);
+        assertTrue(arquivoImagem.exists());
+
+        String textoQrGerado = GerarQRCodeUtils.lerConteudoQRCode(caminhoImagem);
+        Assertions.assertEquals(texto, textoQrGerado);
+    }
 }
