@@ -40,8 +40,8 @@ class GeradorQRCodeTest {
     }
 
     @Test
-    @DisplayName("Dado que eu informe os valores corretos" +
-                 "então deve ser gerado o QR Code com sucesso")
+    @DisplayName("Dado que eu informe os valores corretos." +
+                    "Então deve ser gerado o QR Code com sucesso.")
     void testeGerarQrCodeComSucesso() {
         // Execução do método
         GeradorQRCode.gerarQRCode(texto, largura, altura, formatoImagem, caminhoImagem);
@@ -52,8 +52,8 @@ class GeradorQRCodeTest {
     }
 
     @Test
-    @DisplayName("Dado que eu informe o formato da imagem em PNG" +
-                "então deve ser gerado o QR Code com a extensão .png")
+    @DisplayName("Dado que eu informe o formato da imagem em PNG." +
+                    "Então deve ser gerado o QR Code com a extensão .png.")
     void testeGerarQrCodeComFormatoPng() {
         // Execução do método
         GeradorQRCode.gerarQRCode(texto, largura, altura, formatoImagem, caminhoImagem);
@@ -66,8 +66,8 @@ class GeradorQRCodeTest {
     }
 
     @Test
-    @DisplayName("Dado que eu informe a url do QR Code" +
-                 "então deve ser gerado o QR Code com a url que foi informada")
+    @DisplayName("Dado que eu informe a url do QR Code." +
+                    "Então deve ser gerado o QR Code com a url que foi informada.")
     void testeGerarQrCodeComUrl() {
         // Execução do método
         GeradorQRCode.gerarQRCode(texto, largura, altura, formatoImagem, caminhoImagem);
