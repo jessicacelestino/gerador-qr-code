@@ -12,14 +12,7 @@ import java.io.IOException;
 import java.util.logging.Logger;
 
 public class GeradorQRCode {
-
-    /*
-     * Construtor privado: classe utilitária não deve ser instanciada, para evitar o uso de memória desnecessário
-     */
-    private GeradorQRCode() {
-        super();
-    }
-
+    private GeradorQRCode() { super(); }
     private static final Logger logger = Logger.getLogger(GeradorQRCode.class.getName());
 
     public static void gerarQRCode(String texto, int largura, int altura, String formatoImagem, String caminhoImagem) {
